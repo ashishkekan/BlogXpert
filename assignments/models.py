@@ -8,11 +8,11 @@ class About(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = 'About'
+        verbose_name_plural = "About"
 
     def __str__(self):
         return self.about_heading
-    
+
 
 class SocialLink(models.Model):
     platform = models.CharField(max_length=25)
