@@ -31,6 +31,8 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("login/", views.login, name="login"),
     path("logout/", views.logout, name="logout"),
+    path('favorite/<slug:slug>/', BlogsView.toggle_favorite, name='toggle_favorite'),
+    path('my-favorites/', BlogsView.my_favorites, name='my_favorites'),
     # Dashboards
     path("dashboard/", include("dashboards.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

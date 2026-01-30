@@ -40,6 +40,7 @@
           <p class="card-text">{{ post.short_description | truncatewords:25 }}</p>
         </div>
       </div>
+      <a href="{% url 'toggle_favorite' post.slug %}">❤️ Save</a>
       {% endfor %}
     </div>
     <aside class="col-md-4 blog-sidebar">

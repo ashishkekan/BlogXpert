@@ -62,3 +62,26 @@ def search(request):
         "keyword": keyword,
     }
     return render(request, "search.html", context)
+
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Blog, Favorite
+
+@login_required
+def toggle_favorite(request, slug):
+    post = get_object_or_404(Blog, slug=slug)
+    fav, created = Favorite.objects.get_or_create(
+        user=request.user,
+        post=post
+    )
+    if not created:
+        fav.delete()
+    return redirect('blogs', slug=post.slug)
+
+
+@login_required
+def my_favorites(request):
+    posts = Blog.objects.filter(favorite__user=request.user)
+    return render(request, 'my_favorites.html', {'posts': posts})
